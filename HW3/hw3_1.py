@@ -1,5 +1,6 @@
 import pyspark
 from pyspark import SparkConf, SparkContext
+import numpy as np
 import re
 import sys
 import math
@@ -33,6 +34,12 @@ def dot_product(v1, v2):
 	for i in range(len(v1)):
 		s += v1[i]*v2[i] 
 	return s
+
+def add_vec(v1, v2):
+	if len(v1) != len(v2):
+		return None
+	res = [v1[i] + v2[i] for i in range(len(v1))]
+	return res
 
 data = loadData(sys.argv[1]) # Load data
 num_nodes = data.flatMap(lambda p: p).distinct().count() # number of nodes (default is 1000)
